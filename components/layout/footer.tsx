@@ -12,19 +12,19 @@ export function Footer() {
 
   const footerLinks = {
     company: [
-      { label: 'About Us', href: '/about' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'Careers', href: '/careers' },
+      { label: 'About Us', href: '/coming-soon?page=about-us' },
+      { label: 'Contact', href: '/coming-soon?page=contact' },
+      { label: 'Careers', href: '/coming-soon?page=careers' },
     ],
     support: [
-      { label: 'Help Center', href: '/help' },
-      { label: 'Track Order', href: '/track' },
-      { label: 'Returns', href: '/returns' },
+      { label: 'Help Center', href: '/coming-soon?page=help-center' },
+      { label: 'Track Order', href: '/coming-soon?page=track-order' },
+      { label: 'Returns', href: '/coming-soon?page=returns' },
     ],
     legal: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
-      { label: 'Cookies Policy', href: '/cookies' },
+      { label: 'Privacy Policy', href: '/coming-soon?page=privacy-policy' },
+      { label: 'Terms of Service', href: '/coming-soon?page=terms-of-service' },
+      { label: 'Cookies Policy', href: '/coming-soon?page=cookies-policy' },
     ],
   };
 
