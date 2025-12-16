@@ -208,6 +208,25 @@ export default async function CheckoutSuccessPage({ searchParams }: SuccessPageP
           </Button>
         </div>
 
+        {/* Guest: Sign Up Prompt */}
+        {!order.user_id && (
+          <Card className="mt-8 border-primary/20 bg-primary/5">
+            <CardContent className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6">
+              <div className="text-center sm:text-left">
+                <h3 className="font-semibold text-lg text-primary">Track your order easily</h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Create an account with <strong>{order.customer_email}</strong> to track this order and speed up future checkouts.
+                </p>
+              </div>
+              <Button asChild>
+                <Link href={`/signup?email=${encodeURIComponent(order.customer_email)}&name=${encodeURIComponent(order.customer_name)}`}>
+                  Create Account
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Next Steps */}
         <Card className="mt-8 bg-muted">
           <CardHeader>

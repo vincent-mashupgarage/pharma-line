@@ -10,6 +10,7 @@
 'use server';
 
 import { createServerClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import type { CreateOrderPayload, Order, ApiResponse } from '@/types';
 import { revalidatePath } from 'next/cache';
 
@@ -187,7 +188,7 @@ export async function getUserOrders(): Promise<ApiResponse<Order[]>> {
 
     const { data: orders, error } = await supabase
       .from('orders')
-      .select('*, items:order_items(*, product:products(images))')
+      .select('*, items:order_items(*, product:products(*))')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false });
 
@@ -231,7 +232,7 @@ export async function getOrderById(
       .select(
         `
         *,
-        items:order_items(*, product:products(images))
+        items:order_items(*, product:products(*))
       `
       )
       .eq('id', orderId);
@@ -267,19 +268,20 @@ export async function getOrderById(
 
 /**
  * Get order by order number (for confirmation page)
+ * Uses Admin Client to bypass RLS for guest checkout success page
  */
 export async function getOrderByNumber(
   orderNumber: string
 ): Promise<ApiResponse<Order & { items: any[] }>> {
   try {
-    const supabase = await createServerClient();
+    const supabase = createAdminClient();
 
     const { data: order, error } = await supabase
       .from('orders')
       .select(
         `
         *,
-        items:order_items(*, product:products(images))
+        items:order_items(*, product:products(*))
       `
       )
       .eq('order_number', orderNumber)
